@@ -237,6 +237,7 @@ oraz uaktualnić gem Bundler do versji 1.16:
 gem 'bundler', '~>1.16.1'
 ----
 [source,sh]
+.Terminal
 ----
 heroku run gem install bundler
 ----
@@ -307,7 +308,6 @@ gem 'bootstrap-sass-extras', '0.0.7'
 
 # Optionally install
 group :development do
-  # gem 'quiet_assets' # see https://github.com/evrone/quiet_assets
   gem 'rubocop', require: false # for Atom editor
   gem 'scss_lint', require: false # for Atom editor
 end
