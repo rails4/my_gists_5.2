@@ -230,10 +230,10 @@ Ostrzeżenia (nie pokazane powyżej) powyżej sugeruje, że warto dodać plik _P
 ----
 web: bundle exec puma -C config/puma.rb
 ----
-oraz dopisać do pliku _Gemfile_:
+oraz uaktualnić gem Bundler do versji 1.16:
 [source,ruby]
 ----
-gem 'bundler', '~>1.16.1'
+heroku run gem install bundler
 ----
 
 
