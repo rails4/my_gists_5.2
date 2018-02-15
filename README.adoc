@@ -285,6 +285,8 @@ Tworzymy nowy plik _app/assets/stylesheets/rouge.css.erb_ o zawartości:
 
 ## Custom layout with Bootstrap
 
+TODO: Bootstrap 4.
+
  Co to jest layout? layout aplikacji? gdzie definiujemy layout?
 
 . http://getbootstrap.com[Bootstrap] –
