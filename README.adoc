@@ -232,6 +232,11 @@ web: bundle exec puma -C config/puma.rb
 ----
 oraz uaktualnić gem Bundler do versji 1.16:
 [source,ruby]
+.Gemfile
+----
+gem 'bundler', '~>1.16.1'
+----
+[source,sh]
 ----
 heroku run gem install bundler
 ----
