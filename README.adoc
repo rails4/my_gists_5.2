@@ -254,6 +254,7 @@ W pliku _app/views/gists/index.html.erb_ wymieniamy element _table_
 na element _pre_ i kilka akapitów _p_.
 
 [source,html]
+.app/views/gists/index.html.erb
 ----
 <% @gists.each do |gist| %>
   <pre><%= gist.src %></pre>
@@ -269,11 +270,13 @@ na element _pre_ i kilka akapitów _p_.
 
 W pliku _app/views/gists/show.html.erb_ podmieniamy element z `@gist.src` na:
 [source,html]
+.app/views/gists/show.html.erb
 ----
 <pre class="highlight"><%= raw Rouge.highlight @gist.src, @gist.lang, 'html' %></pre>
 ----
 
 Tworzymy nowy plik _app/assets/stylesheets/rouge.css.erb_ o zawartości:
+.app/assets/stylesheets/rouge.css.erb
 [source,erb]
 ----
 <%= Rouge::Themes::Github.render(scope: '.highlight')%>
