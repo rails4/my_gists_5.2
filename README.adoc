@@ -3,13 +3,12 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-. Ruby version: *2.4.1*
+. Ruby version: *2.5.0*
 . Uses https://github.com/jneen/rouge[rouge gem] –
   a pure-ruby code highlighter that is compatible with _pygments_.
 . https://www.railstutorial.org/book/beginning#sec-deploying[Deployment instructions for Heroku]
   by M. Hartl
-. http://edgeguides.rubyonrails.org/getting_started.html#adding-a-second-model[Adding a Second Model]
-+
+. http://edgeguides.rubyonrails.org/getting_started.html#adding-a-second-model[Adding a Second Model].
 Kod jest na gałęzi _add_comments_
 +
 ```sh
@@ -115,8 +114,8 @@ Update one more _Gist_ show template.
 
 [source,bash]
 ----
-rails new my_gists
-cd my_gists
+rails new my_gists_5.2
+cd my_gists_5.2
 # bundle install
 # bundle install --local
 bundle install --without production
@@ -158,8 +157,8 @@ IMPORTANT: W pliku _Gemfile_ należy przenieść
 gem _sqlite3_ do grupy _:development, :test_,
 a gem _pg_ należy wpisać do grupy _:production_.
 
-._Gemfile_
 [source,ruby]
+.Gemfile
 ----
 group :development, :test do
   gem 'byebug', platform: :mri
