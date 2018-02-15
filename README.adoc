@@ -176,7 +176,7 @@ Po instalacji wykonujemy:
 [source,bash]
 ----
 bundle install --without production
-git commit -am "update for Heroku"
+git commit -am "Update for Heroku"
 
 # wykonujemy tylko raz
 heroku login
