@@ -191,6 +191,12 @@ dodajemy ją na konsoli.
 heroku create
 # Creating app... done, ⬢ still-falls-28867
 # https://still-falls-28867.herokuapp.com/ | https://git.heroku.com/still-falls-28867.git
+
+heroku apps:rename gists52
+# Renaming shrouded-spire-21039 to gists52... done
+# https://gists52.herokuapp.com/ | https://git.heroku.com/gists52.git
+# Git remote heroku updated
+#  ▸    Don't forget to update git remotes for all other local checkouts of the app.
 ----
 
 Deploying,
@@ -199,62 +205,37 @@ zob. też https://devcenter.heroku.com/articles/git[Deploying with Git].
 [source,bash]
 ----
 git push heroku master
-# remote: ###### WARNING:
-# remote:        You have not declared a Ruby version in your Gemfile.
-# remote:        To set your Ruby version add this line to your Gemfile:
-# remote:        ruby '2.2.6'
-# remote:        # See https://devcenter.heroku.com/articles/ruby-versions for more information.
+# remote: Compressing source files... done.
+# remote: Building source:
 # remote:
-# remote: ###### WARNING:
-# remote:        No Procfile detected, using the default web server.
-# remote:        We recommend explicitly declaring how to boot your server process via a Procfile.
-# remote:        https://devcenter.heroku.com/articles/ruby-default-web-server
-# remote:
-# remote: -----> Discovering process types
-# remote:        Procfile declares types     -> (none)
-# remote:        Default types for buildpack -> console, rake, web, worker
-# remote:
-# remote: -----> Compressing...
-# remote:        Done: 28M
-# remote: -----> Launching...
-# remote:        Released v5
-# remote:        https://still-falls-28867.herokuapp.com/ deployed to Heroku
-# remote:
-# remote: Verifying deploy.... done.
-# To https://git.heroku.com/still-falls-28867.git
-#  * [new branch]      master -> master
+# remote:  !     Warning: Multiple default buildpacks reported the ability to handle this app. The first buildpack in the list below will be used.
+# remote: 			Detected buildpacks: Ruby,Node.js
+# remote: 			See https://devcenter.heroku.com/articles/buildpacks#buildpack-detect-order
+# remote: -----> Ruby app detected
+# remote: -----> Compiling Ruby/Rails
+# remote: -----> Using Ruby version: ruby-2.5.0
+# remote: -----> Installing dependencies using bundler 1.15.2
+# remote:        Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment
+# remote:        Warning: the running version of Bundler (1.15.2) is older than the version that created the lockfile (1.16.1). We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.
 
 heroku run rails db:migrate
-# heroku open https://still-falls-28867.herokuapp.com/
-
-heroku apps:rename gists5
-# Renaming still-falls-28867 to gists5... done
-# https://gists5.herokuapp.com/ | https://git.heroku.com/gists5.git
-# Git remote heroku updated
-#  ▸    Don't forget to update git remotes for all other local checkouts of the app.
-# heroku open https://gists5.herokuapp.com/
+Running rails db:migrate on ⬢ gists52... up, run.1540 (Free)
+# MacOS
+# heroku open https://gists52.herokuapp.com/
 ----
 
-Ostrzeżenia powyżej sugerują, że warto zmienić kilka rzeczy, np.
-dodać wersję Ruby do pliku _Gemfile_:
-
+Ostrzeżenia (nie pokazane powyżej) powyżej sugeruje, że warto dodać plik _Procfile_:
 [source,ruby]
-----
-ruby '2.4.0'
-----
-
-dodać plik _Procfile_ w którym wymienimy domyślny (dla wersji Rails 4)
-serwer webowy https://devcenter.heroku.com/articles/ruby-default-web-server[Webrick]
-na szybką pumę 😓
-
-._Procfile_
-[source,ruby]
+.Procfile
 ----
 web: bundle exec puma -C config/puma.rb
 ----
+oraz dopisać do pliku _Gemfile_:
+[source,ruby]
+----
+gem 'bundler', '~>1.16.1'
+----
 
-Zobacz też
-https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server[Deploying Rails Applications with the Puma Web Server].
 
 
 ## Source code prettyprinting
@@ -262,7 +243,7 @@ https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma
 ._Gemfile_
 [source,ruby]
 ----
-gem 'rouge', '~> 2.0.0'
+gem 'rouge', '~> 3.1.1'
 ----
 
 W pliku _app/views/gists/index.html.erb_ wymieniamy element _table_
