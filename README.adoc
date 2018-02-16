@@ -1,9 +1,19 @@
 # https://gists52.herokuapp.com/[My Gists 5.2 with Bootstrap 4]
 :toc!:
 
+* https://github.com/RailsApps/rails-bootstrap[Rails 5.1 starter app with the Bootstrap 4 front-end framework].
+
+
 ## Custom layout with Bootstrap
 
-TODO: Bootstrap 4.
+. https://github.com/twbs/bootstrap-rubygem[Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass].
+
+[source,ruby]
+.Gemfile
+----
+
+----
+
 
 . https://github.com/bootstrap-ruby/bootstrap_form[bootstrap_form].
 
