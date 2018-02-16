@@ -181,93 +181,86 @@ Tworzymy nowy plik _rouge.css.erb_ o zawartości:
 ----
 
 
-## Adding a second model
 
-The second model will handle comments on gists.
+## Custom layout with Bootstrap
 
-### 6.1 Generating a Model
+TODO: Bootstrap 4.
 
-```sh
-bin/rails generate model Comment commenter:string body:text gist:references
-# check generated files models/comments.rb and migration
-bin/rails db:migrate
-```
+. https://github.com/bootstrap-ruby/bootstrap_form[bootstrap_form].
 
-### 6.2 Associating Models
+Co to jest layout? layout aplikacji? gdzie definiujemy layout?
 
-* Each comment belongs to one gist.
-* One gist can have many comments.
+. http://getbootstrap.com[Bootstrap] –
+  the most popular HTML, CSS, and JS framework for developing responsive,
+  mobile first projects on the web
+. https://www.railstutorial.org/book/filling_in_the_layout#sec-custom_css[Bootstrap and custom CSS]
+. https://github.com/bootstrap-ruby/rails-bootstrap-forms[rails-bootstrap-forms] –
+  a Rails form builder that makes it super easy to create beautiful-looking
+  forms with Twitter Bootstrap 3+. Wraps the standard Rails form helpers
+  so it’s practically a drop-in replacement.
 
-```ruby
-class Gist < ApplicationRecord
-  has_many :comments
-  validates :src, presence: true, length: { minimum: 8, maximum: 256 }
+[source,ruby]
+.Gemfile
+----
+# Make all the necessary Bootstrap files available to the current application
+gem 'bootstrap-sass', '3.3.7'
+gem 'bootstrap-sass-extras', '0.0.7'
+
+# Optionally install
+group :development do
+  gem 'rubocop', require: false # for Atom editor
+  gem 'scss_lint', require: false # for Atom editor
 end
-```
+----
 
-### 6.3 Adding a Route for Comments
+Po tych poprawkach w pliku _Gemfile_ wykonujemy na konsoli te polecenia:
 
-Update _config/routes.rb_.
+[source,sh]
+----
+bundle
+rails generate
+rails generate bootstrap:install
+rails generate bootstrap:themed gists # <- liczba mnoga!
+----
 
-```ruby
-resources :gist do
-  resources :comments
-end
-```
 
-Check routing.
+### Bootstrap krok po kroku
 
-```sh
-rails routes
-```
+Dodajemy pionowy odstęp u góry każdej strony _app/assets/stylesheets/custom.css.scss_:
+[source,scss]
+----
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+// body {
+//   padding-top: 60px;
+// }
+----
 
-### 6.4 Generating a Controller
+Zmieniamy layout aplikacji _app/views/layouts/application.html.erb_:
+[source,html]
+----
+<body>
+  <%= render 'layouts/header' %>
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+----
 
-```ruby
-bin/rails generate controller Comments
-```
+Dodajemy widok częściowy _app/views/layouts/_header.html.erb_:
+[source,html]
+----
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home",  '/' %></li>
+        <li><%= link_to "About", '/about' %></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+----
 
-Users will create their comments directly after reading the gist, and once
-they have added their comment, will be sent back to the gist show page to see
-their comment now listed.
-
-_CommentsController_ is there to provide a method to create comments and
-delete spam comments when they arrive.
-
-First update the _Gist_ show template.
-
-```html
-<h2>Add a comment</h2>
-<%= form_for([@gist, @gist.comments.build]) do |f| %>
-  <p><%= f.label :commenter %><br><%= f.text_field :commenter %></p>
-  <p><%= f.label :body %><br><%= f.text_area :body %></p>
-  <p><%= f.submit %></p>
-<% end %>
-```
-
-Now, wire up the create in _comments_controller.rb_.
-
-```ruby
-class CommentsController < ApplicationController
-  def create
-    @gist = Gist.find(params[:gist_id])
-    @comment = @gist.comments.create(comment_params)
-    redirect_to gist_path(@gist)
-  end
-
-  private
-
-  def comment_params
-    params.require(:comment).permit(:commenter, :body)
-  end
-end
-```
-
-Update one more _Gist_ show template.
-
-```html
-<% @gist.comments.each do |comment| %>
-  <p><strong>Commenter:</strong><%= comment.commenter %></p>
-  <p><strong>Comment:</strong><%= comment.body %></p>
-<% end %>
-```
+Pozostaje **przywrócić** kolorowanie fragmentów kodu (gists),
+dodać podstronę _About_, poprawić _index.html.erb_, itd.
