@@ -6,16 +6,15 @@
 
 ## Custom layout with Bootstrap 4
 
+[NOTE]
+====
+*Co to jest layout? Co to jest layout aplikacji? gdzie jest zdefiniowany layout?*
+====
+
 . http://getbootstrap.com[Bootstrap] –
   the most popular HTML, CSS, and JS framework for developing responsive,
   mobile first projects on the web
 . https://www.railstutorial.org/book/filling_in_the_layout#sec-custom_css[Bootstrap 3 and custom CSS]
-
-[NOTE]
-====
-Co to jest layout? Co to jest layout aplikacji? gdzie jest zdefiniowany layout?
-====
-
 . https://github.com/twbs/bootstrap-rubygem[Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass].
 
 Dodajemy potrzebne gemy do _Gemfile_:
