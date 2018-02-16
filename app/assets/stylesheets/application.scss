@@ -1,0 +1,9 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+// https://github.com/twbs/bootstrap-rubygem/blob/master/assets/stylesheets/bootstrap/_variables.scss
+
+@import 'rouge';
+@import 'bootstrap';
+
+body {
+  padding-top: 60px;
+}

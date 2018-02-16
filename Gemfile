@@ -13,7 +13,12 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'rouge', '~> 3.1.1'
+gem 'jquery-rails', '~> 4.3.1'
 gem 'bootstrap', '~> 4.0.0'
+
+gem "bootstrap_form",
+    git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
+    branch: "master"
 
 gem 'bootsnap', '>= 1.1.0', require: false
 

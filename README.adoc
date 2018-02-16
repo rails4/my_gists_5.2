@@ -4,65 +4,49 @@
 * https://github.com/RailsApps/rails-bootstrap[Rails 5.1 starter app with the Bootstrap 4 front-end framework].
 
 
-## Custom layout with Bootstrap
-
-. https://github.com/twbs/bootstrap-rubygem[Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass].
-
-[source,ruby]
-.Gemfile
-----
-
-----
-
-
-. https://github.com/bootstrap-ruby/bootstrap_form[bootstrap_form].
-
-Co to jest layout? layout aplikacji? gdzie definiujemy layout?
+## Custom layout with Bootstrap 4
 
 . http://getbootstrap.com[Bootstrap] –
   the most popular HTML, CSS, and JS framework for developing responsive,
   mobile first projects on the web
-. https://www.railstutorial.org/book/filling_in_the_layout#sec-custom_css[Bootstrap and custom CSS]
-. https://github.com/bootstrap-ruby/rails-bootstrap-forms[rails-bootstrap-forms] –
-  a Rails form builder that makes it super easy to create beautiful-looking
-  forms with Twitter Bootstrap 3+. Wraps the standard Rails form helpers
-  so it’s practically a drop-in replacement.
+. https://www.railstutorial.org/book/filling_in_the_layout#sec-custom_css[Bootstrap 3 and custom CSS]
 
+[NOTE]
+====
+Co to jest layout? Co to jest layout aplikacji? gdzie jest zdefiniowany layout?
+====
+
+. https://github.com/twbs/bootstrap-rubygem[Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass].
+
+Dodajemy potrzebne gemy do _Gemfile_:
 [source,ruby]
 .Gemfile
 ----
-# Make all the necessary Bootstrap files available to the current application
-gem 'bootstrap-sass', '3.3.7'
-gem 'bootstrap-sass-extras', '0.0.7'
-
-# Optionally install
-group :development do
-  gem 'rubocop', require: false # for Atom editor
-  gem 'scss_lint', require: false # for Atom editor
-end
+gem 'jquery-rails', '~> 4.3.1' # for Rails >= 5.1
+gem 'bootstrap', '~> 4.0.0'
 ----
 
-Po tych poprawkach w pliku _Gemfile_ wykonujemy na konsoli te polecenia:
+## Bootstrapped forms
 
-[source,sh]
-----
-bundle
-rails generate
-rails generate bootstrap:install
-rails generate bootstrap:themed gists # <- liczba mnoga!
-----
+. https://github.com/bootstrap-ruby/bootstrap_form[bootstrap_form].
 
 
-### Bootstrap krok po kroku
+
+
+
+
+### TODO: Bootstrap 4 krok po kroku
 
 Dodajemy pionowy odstęp u góry każdej strony _app/assets/stylesheets/custom.css.scss_:
 [source,scss]
 ----
+@import 'rouge';
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-// body {
-//   padding-top: 60px;
-// }
+
+body {
+  padding-top: 60px;
+}
 ----
 
 Zmieniamy layout aplikacji _app/views/layouts/application.html.erb_:
