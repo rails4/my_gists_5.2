@@ -26,54 +26,39 @@ gem 'jquery-rails', '~> 4.3.1' # for Rails >= 5.1
 gem 'bootstrap', '~> 4.0.0'
 ----
 
+
 ## Bootstrapped forms
 
 . https://github.com/bootstrap-ruby/bootstrap_form[bootstrap_form].
 
 
+## Bootstrap 4 krok po kroku
 
-
-
-
-### TODO: Bootstrap 4 krok po kroku
-
-Dodajemy pionowy odstęp u góry każdej strony _app/assets/stylesheets/custom.css.scss_:
+Dodajemy pionowy odstęp u góry każdej strony:
 [source,scss]
+.app/assets/stylesheets/application.scss
 ----
 @import 'rouge';
-@import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import 'rails_bootstrap_forms';
 
 body {
   padding-top: 60px;
 }
 ----
 
-Zmieniamy layout aplikacji _app/views/layouts/application.html.erb_:
+Zmieniamy layout aplikacji:
 [source,html]
+.app/views/layouts/application.html.erb
 ----
 <body>
-  <%= render 'layouts/header' %>
-  <div class="container">
+  <div role="main" class="container">
     <%= yield %>
   </div>
 </body>
 ----
 
-Dodajemy widok częściowy _app/views/layouts/_header.html.erb_:
-[source,html]
-----
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",  '/' %></li>
-        <li><%= link_to "About", '/about' %></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-----
+Dodajemy widoki częściowe:  *_navigation.html.erb*, *_messages.html.erb*.
 
-Pozostaje **przywrócić** kolorowanie fragmentów kodu (gists),
-dodać podstronę _About_, poprawić _index.html.erb_, itd.
+Na koniec, pozostaje **przywrócić** kolorowanie fragmentów kodu (gists),
+dodać strony z nagłówka strony.
