@@ -1,116 +1,28 @@
-# My Gists
+# https://gists52.herokuapp.com/[My Gists 5.2 on Heroku]
+:toc!:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[NOTE]
+====
+1. The *bootstrap4* branch contains the version which uses
+the https://getbootstrap.com[Bootstrap] toolkit in views.
+1. The *adding_second_model* branch contains the version which handles
+comments on gists.
+====
 
-. Ruby version: *2.5.0*
-. Uses https://github.com/jneen/rouge[rouge gem] –
-  a pure-ruby code highlighter that is compatible with _pygments_.
+The README would normally document whatever steps are necessary
+to get the application up and running. This README is special.
+
+
+## Basic info about the app
+
+. Uses Ruby on Rails *5.2.0.rc1* and Ruby version: *2.5.0*.
+. https://github.com/jneen/rouge[Rouge] gem is used to highlight code snippets.
 . https://www.railstutorial.org/book/beginning#sec-deploying[Deployment instructions for Heroku]
   by M. Hartl
 . http://edgeguides.rubyonrails.org/getting_started.html#adding-a-second-model[Adding a Second Model].
-Kod jest na gałęzi _add_comments_
-+
-```sh
-git checkout add_comments
-```
-
-## Adding a second model
-
-The second model will handle comments on gists.
-
-### 6.1 Generating a Model
-
-```sh
-bin/rails generate model Comment commenter:string body:text gist:references
-# check generated files models/comments.rb and migration
-bin/rails db:migrate
-```
-
-### 6.2 Associating Models
-
-* Each comment belongs to one gist.
-* One gist can have many comments.
-
-```ruby
-class Gist < ApplicationRecord
-  has_many :comments
-  validates :src, presence: true, length: { minimum: 8, maximum: 256 }
-end
-```
-
-### 6.3 Adding a Route for Comments
-
-Update _config/routes.rb_.
-
-```ruby
-resources :gist do
-  resources :comments
-end
-```
-
-Check routing.
-
-```sh
-rails routes
-```
-
-### 6.4 Generating a Controller
-
-```ruby
-bin/rails generate controller Comments
-```
-
-Users will create their comments directly after reading the gist, and once
-they have added their comment, will be sent back to the gist show page to see
-their comment now listed.
-
-_CommentsController_ is there to provide a method to create comments and
-delete spam comments when they arrive.
-
-First update the _Gist_ show template.
-
-```html
-<h2>Add a comment</h2>
-<%= form_for([@gist, @gist.comments.build]) do |f| %>
-  <p><%= f.label :commenter %><br><%= f.text_field :commenter %></p>
-  <p><%= f.label :body %><br><%= f.text_area :body %></p>
-  <p><%= f.submit %></p>
-<% end %>
-```
-
-Now, wire up the create in _comments_controller.rb_.
-
-```ruby
-class CommentsController < ApplicationController
-  def create
-    @gist = Gist.find(params[:gist_id])
-    @comment = @gist.comments.create(comment_params)
-    redirect_to gist_path(@gist)
-  end
-
-  private
-
-  def comment_params
-    params.require(:comment).permit(:commenter, :body)
-  end
-end
-```
-
-Update one more _Gist_ show template.
-
-```html
-<% @gist.comments.each do |comment| %>
-  <p><strong>Commenter:</strong><%= comment.commenter %></p>
-  <p><strong>Comment:</strong><%= comment.body %></p>
-<% end %>
-```
 
 
-
-
-
-## From the beginning
+## Building the app in baby steps
 
 [source,bash]
 ----
@@ -366,3 +278,98 @@ Dodajemy widok częściowy _app/views/layouts/_header.html.erb_:
 
 Pozostaje **przywrócić** kolorowanie fragmentów kodu (gists),
 dodać podstronę _About_, poprawić _index.html.erb_, itd.
+
+
+
+
+
+## Adding a second model
+
+The second model will handle comments on gists.
+
+### 6.1 Generating a Model
+
+```sh
+bin/rails generate model Comment commenter:string body:text gist:references
+# check generated files models/comments.rb and migration
+bin/rails db:migrate
+```
+
+### 6.2 Associating Models
+
+* Each comment belongs to one gist.
+* One gist can have many comments.
+
+```ruby
+class Gist < ApplicationRecord
+  has_many :comments
+  validates :src, presence: true, length: { minimum: 8, maximum: 256 }
+end
+```
+
+### 6.3 Adding a Route for Comments
+
+Update _config/routes.rb_.
+
+```ruby
+resources :gist do
+  resources :comments
+end
+```
+
+Check routing.
+
+```sh
+rails routes
+```
+
+### 6.4 Generating a Controller
+
+```ruby
+bin/rails generate controller Comments
+```
+
+Users will create their comments directly after reading the gist, and once
+they have added their comment, will be sent back to the gist show page to see
+their comment now listed.
+
+_CommentsController_ is there to provide a method to create comments and
+delete spam comments when they arrive.
+
+First update the _Gist_ show template.
+
+```html
+<h2>Add a comment</h2>
+<%= form_for([@gist, @gist.comments.build]) do |f| %>
+  <p><%= f.label :commenter %><br><%= f.text_field :commenter %></p>
+  <p><%= f.label :body %><br><%= f.text_area :body %></p>
+  <p><%= f.submit %></p>
+<% end %>
+```
+
+Now, wire up the create in _comments_controller.rb_.
+
+```ruby
+class CommentsController < ApplicationController
+  def create
+    @gist = Gist.find(params[:gist_id])
+    @comment = @gist.comments.create(comment_params)
+    redirect_to gist_path(@gist)
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:commenter, :body)
+  end
+end
+```
+
+Update one more _Gist_ show template.
+
+```html
+<% @gist.comments.each do |comment| %>
+  <p><strong>Commenter:</strong><%= comment.commenter %></p>
+  <p><strong>Comment:</strong><%= comment.body %></p>
+<% end %>
+```
