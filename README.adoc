@@ -17,8 +17,8 @@ to get the application up and running. This README is special.
 
 . Uses Ruby on Rails *5.2.0.rc1* and Ruby version: *2.5.0*.
 . https://github.com/jneen/rouge[Rouge] gem is used to highlight code snippets.
-. https://www.railstutorial.org/book/beginning#sec-deploying[Deployment instructions for Heroku]
-  by M. Hartl
+. Chapter https://www.railstutorial.org/book/beginning#sec-deploying[Deployment instructions for Heroku]
+  in https://www.railstutorial.org/book/frontmatter[Ruby on Rails Tutorial] by M. Hartl
 . http://edgeguides.rubyonrails.org/getting_started.html#adding-a-second-model[Adding a Second Model].
 
 
