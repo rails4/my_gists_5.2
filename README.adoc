@@ -34,7 +34,7 @@ gem 'bootstrap', '~> 4.0.0'
 
 ## Bootstrap 4 krok po kroku
 
-Dodajemy pionowy odstęp u góry każdej strony:
+Importujemy (S)CSS i dodajemy pionowy odstęp u góry każdej strony:
 [source,scss]
 .app/assets/stylesheets/application.scss
 ----
@@ -62,3 +62,5 @@ Dodajemy widoki częściowe:  *_navigation.html.erb*, *_messages.html.erb*.
 
 Na koniec, pozostaje **przywrócić** kolorowanie fragmentów kodu (gists),
 dodać strony z nagłówka strony.
+
+O czymś jeszcze zapomnieliśmy?
