@@ -28,15 +28,13 @@ to get the application up and running. This README is special.
 ----
 rails new my_gists_5.2
 cd my_gists_5.2
-# bundle install
-# bundle install --local
 bundle install --without production
 # bundle install --without production --local
-# bundle --path vendor/bundle --without production
-# bundle --path /tmp/<unique id> --without production  # w laboratoriach (quota)
+# bundle install --without production --path vendor/bundle
+
 rails server --help
-# rails server -p 3000 -b 0.0.0.0
 rails server
+# rails server -p 3000 -b 0.0.0.0
 ----
 
 Generate Gist model/views/controlers:
@@ -45,17 +43,16 @@ Generate Gist model/views/controlers:
 ----
 rails generate --help
 rails generate scaffold gist src:text lang:string desc:string
-# rails db:migrate RAILS_ENV=development
 rails db:migrate
-# check available routes
-# rails routes
+# rails db:migrate RAILS_ENV=development
+
+rails routes
 # open http://localhost:3000/gists
 ----
 
 You can have the root of your site routed with "root"
-
-.config/routes.rb
 [source,ruby]
+.config/routes.rb
 ----
 root 'gists#index'
 # http://localhost:3000
@@ -65,7 +62,8 @@ root 'gists#index'
 
 Zobacz też https://www.railstutorial.org/book/beginning#sec-deploying[Deploying].
 
-IMPORTANT: W pliku _Gemfile_ należy przenieść
+[IMPORTANT]
+W pliku _Gemfile_ należy przenieść
 gem _sqlite3_ do grupy _:development, :test_,
 a gem _pg_ należy wpisać do grupy _:production_.
 
@@ -76,7 +74,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'sqlite3'
 end
-
 group :production do
   gem 'pg', '1.0.0'
 end
@@ -90,7 +87,7 @@ Po instalacji wykonujemy:
 bundle install --without production
 git commit -am "Update for Heroku"
 
-# wykonujemy tylko raz
+# Te polecenia wykonujemy tylko raz.
 heroku login
 heroku keys:add
 ----
@@ -111,8 +108,7 @@ heroku apps:rename gists52
 #  ▸    Don't forget to update git remotes for all other local checkouts of the app.
 ----
 
-Deploying,
-zob. też https://devcenter.heroku.com/articles/git[Deploying with Git].
+Zobacz też na Heroku https://devcenter.heroku.com/articles/git[Deploying with Git].
 
 [source,bash]
 ----
@@ -131,7 +127,7 @@ git push heroku master
 # remote:        Warning: the running version of Bundler (1.15.2) is older than the version that created the lockfile (1.16.1). We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.
 
 heroku run rails db:migrate
-Running rails db:migrate on ⬢ gists52... up, run.1540 (Free)
+# Running rails db:migrate on ⬢ gists52... up, run.1540 (Free)
 # MacOS
 # heroku open https://gists52.herokuapp.com/
 ----
@@ -142,23 +138,12 @@ Ostrzeżenia (nie pokazane powyżej) powyżej sugeruje, że warto dodać plik _P
 ----
 web: bundle exec puma -C config/puma.rb
 ----
-oraz uaktualnić gem Bundler do versji 1.16:
+
+
+## Source Code Prettyprinting
+
 [source,ruby]
 .Gemfile
-----
-gem 'bundler', '~>1.16.1'
-----
-[source,sh]
-.Terminal
-----
-heroku run gem install bundler
-----
-
-
-## Source code prettyprinting
-
-._Gemfile_
-[source,ruby]
 ----
 gem 'rouge', '~> 3.1.1'
 ----
@@ -181,14 +166,14 @@ na element _pre_ i kilka akapitów _p_.
 <% end %>
 ----
 
-W pliku _app/views/gists/show.html.erb_ podmieniamy element z `@gist.src` na:
+W widoku _show_ podmieniamy element z `@gist.src` na:
 [source,html]
 .app/views/gists/show.html.erb
 ----
 <pre class="highlight"><%= raw Rouge.highlight @gist.src, @gist.lang, 'html' %></pre>
 ----
 
-Tworzymy nowy plik _app/assets/stylesheets/rouge.css.erb_ o zawartości:
+Tworzymy nowy plik _rouge.css.erb_ o zawartości:
 .app/assets/stylesheets/rouge.css.erb
 [source,erb]
 ----
