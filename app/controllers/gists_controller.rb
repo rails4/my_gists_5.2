@@ -62,13 +62,14 @@ class GistsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_gist
-      @gist = Gist.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def gist_params
-      params.require(:gist).permit(:src, :lang, :desc)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_gist
+    @gist = Gist.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def gist_params
+    params.require(:gist).permit(:src, :lang, :desc)
+  end
 end

@@ -3,7 +3,7 @@
 <h1>Gists</h1>
 
 <% @gists.each do |gist| %>
-  <pre><%= gist.src %></pre>
+  <pre><%= gist.src[0..40] + '…' %></pre>
   <p>Lang: <%= gist.lang %></p>
   <p>Desc: <%= gist.desc %></p>
   <p>

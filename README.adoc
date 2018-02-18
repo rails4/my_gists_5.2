@@ -156,7 +156,7 @@ na element _pre_ i kilka akapitów _p_.
 .app/views/gists/index.html.erb
 ----
 <% @gists.each do |gist| %>
-  <pre><%= gist.src %></pre>
+  <pre><%= gist.src[0..40] + '…' %></pre>
   <p>Lang: <%= gist.lang %></p>
   <p>Desc: <%= gist.desc %></p>
   <p>
