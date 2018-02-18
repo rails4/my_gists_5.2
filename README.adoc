@@ -31,34 +31,37 @@ bin/rails db:migrate
 * Each comment belongs to one gist.
 * One gist can have many comments.
 
-```ruby
+[source,ruby]
+----
 class Gist < ApplicationRecord
   has_many :comments
   validates :src, presence: true, length: { minimum: 8, maximum: 256 }
 end
-```
+----
+
 
 ### 6.3 Adding a Route for Comments
 
 Update _config/routes.rb_.
 
-```ruby
-resources :gist do
+[source,ruby]
+----
+resources :gists do
   resources :comments
 end
-```
-
+----
 Check routing.
-
 ```sh
 rails routes
 ```
 
+
 ### 6.4 Generating a Controller
 
-```ruby
+[source,ruby]
+----
 bin/rails generate controller Comments
-```
+----
 
 Users will create their comments directly after reading the gist, and once
 they have added their comment, will be sent back to the gist show page to see
