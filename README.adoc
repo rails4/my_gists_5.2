@@ -3,6 +3,10 @@
 
 The second model will handle comments on gists.
 
+Wzorujemy się na http://edgeguides.rubyonrails.org/getting_started.html[Getting Started with Rails],
+sekcje 6, 7 i 8.
+
+
 ### 6.1 Generating a Model
 
 ```sh
