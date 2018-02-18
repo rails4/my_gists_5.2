@@ -9,11 +9,22 @@ sekcje 6, 7 i 8.
 
 ### 6.1 Generating a Model
 
-```sh
+[source,sh]
+----
 bin/rails generate model Comment commenter:string body:text gist:references
-# check generated files models/comments.rb and migration
+----
+Browse generated files:
+[source,sh]
+----
+rougify db/migrate/2018*_create_comments.rb
+rougify app/models/comment.rb
+----
+And run migration:
+[source,sh]
+----
 bin/rails db:migrate
-```
+----
+
 
 ### 6.2 Associating Models
 
