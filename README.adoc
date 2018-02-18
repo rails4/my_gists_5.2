@@ -17,9 +17,10 @@ to get the application up and running. This README is special.
 
 . Uses Ruby on Rails *5.2.0.rc1* and Ruby version: *2.5.0*.
 . https://github.com/jneen/rouge[Rouge] gem is used to highlight code snippets.
-. Chapter https://www.railstutorial.org/book/beginning#sec-deploying[Deployment instructions for Heroku]
+. https://gists52.herokuapp.com[The app] is deployed to
+  https://www.heroku.com/home[Heroku];
+  see https://www.railstutorial.org/book/beginning#sec-deploying[Deployment instructions for Heroku]
   in https://www.railstutorial.org/book/frontmatter[Ruby on Rails Tutorial] by M. Hartl
-. http://edgeguides.rubyonrails.org/getting_started.html#adding-a-second-model[Adding a Second Model].
 
 
 ## Building the app in baby steps
@@ -28,12 +29,12 @@ to get the application up and running. This README is special.
 ----
 rails new my_gists_5.2
 cd my_gists_5.2
-bundle install --without production
-# bundle install --without production --local
-# bundle install --without production --path vendor/bundle
+bin/bundle install --without production
+# bin/bundle install --without production --local
+# bin/bundle install --without production --path vendor/bundle
 
-rails server --help
-rails server
+bin/rails server --help
+bin/rails server
 # rails server -p 3000 -b 0.0.0.0
 ----
 
@@ -41,12 +42,12 @@ Generate Gist model/views/controlers:
 
 [source,bash]
 ----
-rails generate --help
-rails generate scaffold gist src:text lang:string desc:string
-rails db:migrate
+bin/rails generate --help
+bin/rails generate scaffold gist src:text lang:string desc:string
+bin/rails db:migrate
 # rails db:migrate RAILS_ENV=development
 
-rails routes
+bin/rails routes
 # open http://localhost:3000/gists
 ----
 
@@ -84,7 +85,7 @@ Po instalacji wykonujemy:
 
 [source,bash]
 ----
-bundle install --without production
+bin/bundle install --without production
 git commit -am "Update for Heroku"
 
 # Te polecenia wykonujemy tylko raz.
