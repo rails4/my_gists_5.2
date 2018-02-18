@@ -1,18 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <pre class="highlight"><%= raw Rouge.highlight @gist.src, @gist.lang, 'html' %></pre>
+<p><strong>Lang:</strong> <%= @gist.lang %></p>
+<p><strong>Desc:</strong> <%= @gist.desc %></p>
 
-<p>
-  <strong>Lang:</strong>
-  <%= @gist.lang %>
-</p>
+<h2>Comments</h2>
+<% @gist.comments.each do |comment| %>
+  <p><strong>Commenter:</strong> <%= comment.commenter %></p>
+  <p><strong>Comment:</strong> <%= comment.body %></p>
+<% end %>
 
-<p>
-  <strong>Desc:</strong>
-  <%= @gist.desc %>
-</p>
-
-<br>
+<h2>Add a comment</h2>
+<%= form_with(model: [@gist, @gist.comments.build], local: true) do |form| %>
+  <p><%= form.label :commenter %>: <%= form.text_field :commenter %></p>
+  <p><%= form.label :body %>: <%= form.text_area :body %></p>
+  <p><%= form.submit %></p>
+<% end %>
 
 <%= link_to 'Edit', edit_gist_path(@gist) %> |
 <%= link_to 'Back', gists_path %>

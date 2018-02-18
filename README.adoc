@@ -55,12 +55,20 @@ Check routing.
 rails routes
 ```
 
+*Jak sprawdzić, że wygenerowany/dodany powyżej kod działa?*
+
 
 ### 6.4 Generating a Controller
 
 [source,ruby]
 ----
 bin/rails generate controller Comments
+----
+
+Browse generated controller:
+[source,sh]
+----
+rougify app/controllers/comments_controller.rb
 ----
 
 Users will create their comments directly after reading the gist, and once
@@ -70,20 +78,22 @@ their comment now listed.
 _CommentsController_ is there to provide a method to create comments and
 delete spam comments when they arrive.
 
-First update the _Gist_ show template.
-
-```html
+First update the Gist show template.
+[source,html]
+.app/views/gists/show.html.erb
+----
 <h2>Add a comment</h2>
-<%= form_for([@gist, @gist.comments.build]) do |f| %>
-  <p><%= f.label :commenter %><br><%= f.text_field :commenter %></p>
-  <p><%= f.label :body %><br><%= f.text_area :body %></p>
-  <p><%= f.submit %></p>
+<%= form_with(model: [@gist, @gist.comments.build], local: true) do |form| %>
+  <p><%= form.label :commenter %>: <%= form.text_field :commenter %></p>
+  <p><%= form.label :body %>: <%= form.text_area :body %></p>
+  <p><%= form.submit %></p>
 <% end %>
-```
+----
 
 Now, wire up the create in _comments_controller.rb_.
-
-```ruby
+[source,ruby]
+.app/controllers/comments_controller.rb
+----
 class CommentsController < ApplicationController
   def create
     @gist = Gist.find(params[:gist_id])
@@ -97,13 +107,15 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:commenter, :body)
   end
 end
-```
+----
 
-Update one more _Gist_ show template.
-
-```html
+Finally, update _Gist_ show template again.
+[source,html]
+.app/views/gists/show.html.erb
+----
+<h2>Comments</h2>
 <% @gist.comments.each do |comment| %>
-  <p><strong>Commenter:</strong><%= comment.commenter %></p>
-  <p><strong>Comment:</strong><%= comment.body %></p>
+  <p><strong>Commenter:</strong> <%= comment.commenter %></p>
+  <p><strong>Comment:</strong> <%= comment.body %></p>
 <% end %>
-```
+----
