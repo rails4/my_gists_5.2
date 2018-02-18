@@ -18,21 +18,16 @@
 . https://www.railstutorial.org/book/filling_in_the_layout#sec-custom_css[Bootstrap 3 and custom CSS]
 . https://github.com/twbs/bootstrap-rubygem[Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass].
 
-Dodajemy potrzebne gemy do _Gemfile_:
+
+## Bootstrapped layout
+
+Dodajemy dwa gemy do pliku _Gemfile_:
 [source,ruby]
 .Gemfile
 ----
-gem 'jquery-rails', '~> 4.3.1' # for Rails >= 5.1
+gem 'jquery-rails', '~> 4.3.1' # only for Rails >= 5.1
 gem 'bootstrap', '~> 4.0.0'
 ----
-
-
-## Bootstrapped forms
-
-. https://github.com/bootstrap-ruby/bootstrap_form[bootstrap_form].
-
-
-## Bootstrap 4 krok po kroku
 
 Importujemy (S)CSS i dodajemy pionowy odstęp u góry każdej strony:
 [source,scss]
@@ -60,7 +55,11 @@ Zmieniamy layout aplikacji:
 
 Dodajemy widoki częściowe:  *_navigation.html.erb*, *_messages.html.erb*.
 
-Na koniec, pozostaje **przywrócić** kolorowanie fragmentów kodu (gists),
-dodać strony z nagłówka strony.
+Pozostaje jeszcze **przywrócić** kolorowanie fragmentów kodu,
+dodać strony z nagłówka strony. Uff! I to chyba wszystko…
+czy o czymś jeszcze zapomnieliśmy?
 
-O czymś jeszcze zapomnieliśmy?
+
+## Bootstrapped forms
+
+. https://github.com/bootstrap-ruby/bootstrap_form[bootstrap_form].
