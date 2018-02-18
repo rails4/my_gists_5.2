@@ -7,6 +7,12 @@
 the https://getbootstrap.com[Bootstrap] toolkit in views.
 1. The *adding_second_model* branch contains the version which handles
 comments on gists.
+1. To show file from another branch:
++
+[source,sh]
+----
+git show bootstrap4:app/views/gists/index.html.erb
+----
 ====
 
 The README would normally document whatever steps are necessary
