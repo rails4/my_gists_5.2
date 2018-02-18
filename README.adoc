@@ -42,18 +42,34 @@ body {
 }
 ----
 
-Zmieniamy layout aplikacji:
+Uaktualniamy manifest JavaScript w pliku _application.js_.
+[source,js]
+----
+//= require rails-ujs
+//= require activestorage
+//= require turbolinks
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+//= require_tree .
+----
+
+Na koniec zmieniamy layout aplikacji:
 [source,html]
 .app/views/layouts/application.html.erb
 ----
 <body>
-  <div role="main" class="container">
-    <%= yield %>
-  </div>
+  <header>
+    <%= render 'layouts/navigation' %>
+  </header>
+  <main role="main" class="container">
+     <%= render 'layouts/messages' %>
+     <%= yield %>
+  </main>
 </body>
 ----
-
-Dodajemy widoki częściowe:  *_navigation.html.erb*, *_messages.html.erb*.
+dodajemy widoki częściowe:  *_navigation.html.erb*, *_messages.html.erb*
+i uaktualniamy kod w znaczniku `<head>`.
 
 Pozostaje jeszcze **przywrócić** kolorowanie fragmentów kodu,
 dodać strony z nagłówka strony. Uff! I to chyba wszystko…
