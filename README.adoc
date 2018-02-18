@@ -186,3 +186,16 @@ Tworzymy nowy plik _rouge.css.erb_ o zawartości:
 ----
 <%= Rouge::Themes::Github.render(scope: '.highlight')%>
 ----
+
+
+## Dodajemy walidację dla modelu Gist
+
+[source,ruby]
+.app/models/gist.rb
+----
+class Gist < ApplicationRecord
+  validates :src, presence: true, length: { minimum: 8, maximum: 1024 }
+  validates :lang, presence: true, length: { maximum: 16 }
+end
+----
+i sprawdzamy czy walidacja działa.
