@@ -41,6 +41,9 @@ group :development do
 
   gem 'rubocop', require: false # for Atom editor
   gem 'scss_lint', require: false # for Atom editor
+
+  # Pry console
+  gem 'pry-rails'
 end
 
 group :test do
