@@ -87,8 +87,8 @@ First update the Gist show template.
 ----
 <h2>Add a comment</h2>
 <%= form_with(model: [@gist, @gist.comments.build], local: true) do |form| %>
-  <p><%= form.label :commenter %>: <%= form.text_field :commenter %></p>
-  <p><%= form.label :body %>: <%= form.text_area :body %></p>
+  <p>Who are you: <%= form.text_field :commenter %></p>
+  <p>Comment: <%= form.text_area :body %></p>
   <p><%= form.submit %></p>
 <% end %>
 ----
@@ -112,7 +112,7 @@ class CommentsController < ApplicationController
 end
 ----
 
-Finally, update _Gist_ show template again.
+Finally, add this sniipet to the _Gist_ show template again.
 [source,html]
 .app/views/gists/show.html.erb
 ----
