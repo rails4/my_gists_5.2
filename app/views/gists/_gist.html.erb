@@ -1,0 +1,8 @@
+<pre><%= gist.src[0..40] + '…' %></pre>
+<p>Lang: <%= gist.lang %></p>
+<p>Desc: <%= gist.desc %></p>
+<p>
+  <%= link_to 'Show', gist %> |
+  <%= link_to 'Edit', edit_gist_path(gist) %> |
+  <%= link_to 'Destroy', gist, method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>
